@@ -71,3 +71,5 @@ A pasta k8s contém os arquivos de Deployment e Service preparados para execuç�
 Considerações
 
 O projeto demonstra a aplicação prática de conceitos de containerização, isolamento de serviços e preparação para orquestração em ambiente de produção, seguindo princípios DevOps.
+
+LInk do Vídeo: https://youtu.be/qYlkm4ntDHY?si=Ulm2UEoodUHhwnmu
