@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: pedidos
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pedidos-net
+
+  orders:
+    build: ./services/orders
+    container_name: orders-service
+    networks:
+      - pedidos-net
+
+  payments:
+    build: ./services/payments
+    container_name: payments-service
+    networks:
+      - pedidos-net
+
+  inventory:
+    build: ./services/inventory
+    container_name: inventory-service
+    networks:
+      - pedidos-net
+
+  gateway:
+    image: nginx:latest
+    container_name: gateway
+    ports:
+      - "8080:80"
+    networks:
+      - pedidos-net
+
+volumes:
+  pgdata:
+
+networks:
+  pedidos-net:
+    driver: bridge
